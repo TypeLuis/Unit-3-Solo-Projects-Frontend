@@ -1,11 +1,11 @@
 import React from 'react'
 
-const MyCart = () => {
+const FavedAnime = () => {
     return (
         <div>
-            Cart Page
+            
         </div>
     )
 }
 
-export default MyCart
+export default FavedAnime

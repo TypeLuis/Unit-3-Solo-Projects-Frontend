@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "unit-3-solo-projects-frontend",
-=======
-  "name": "project-3-frontend",
->>>>>>> f0aefa1284972ed0de1d0acceaea3f2239d1d987
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,11 +11,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dotenv": "^0.1.3",
-<<<<<<< HEAD
     "react-router-dom": "^6.1.1",
-=======
-    "react-router-dom": "^6.1.0",
->>>>>>> f0aefa1284972ed0de1d0acceaea3f2239d1d987
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
@@ -53,8 +45,4 @@
     ]
   },
   "homepage": ""
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f0aefa1284972ed0de1d0acceaea3f2239d1d987

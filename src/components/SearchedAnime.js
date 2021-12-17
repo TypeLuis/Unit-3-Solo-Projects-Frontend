@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ItemDetails = () => {
+const SearchedAnime = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const ItemDetails = () => {
     )
 }
 
-export default ItemDetails
+export default SearchedAnime
