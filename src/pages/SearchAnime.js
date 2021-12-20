@@ -5,6 +5,7 @@ import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 import env from 'react-dotenv'
 import { Link } from 'react-router-dom'
+import SearchLogo from '../components/SearchLogo'
 
 const SearchAnime = () => {
 
@@ -61,7 +62,7 @@ const SearchAnime = () => {
                             <div>
                                 
                                 
-                                <Link to={`/${item.mal_id}`}> <h1>{item.title}</h1> </Link>
+                                <Link to={`/anime/${item.mal_id}`}> <h1>{item.title}</h1> </Link>
                                 <span>{item.mal_id}</span>
                                 <p>{item.synopsis}</p>
                                 <img src={item.image_url} alt={item.title} />
@@ -73,16 +74,21 @@ const SearchAnime = () => {
         
                 :
 
+                
+                <>
+                    <SearchLogo />
 
+                    <div>
+                        <form onSubmit={submitForm}>
+                            <label htmlFor="anime-search">Search Anime:</label>
+                            <input id='anime-search' value={anime} onChange={(e) => setAnime(e.target.value)}/>
 
-                <div>
-                    <form onSubmit={submitForm}>
-                        <label htmlFor="anime">Search Anime:</label>
-                        <input value={anime} onChange={(e) => setAnime(e.target.value)}/>
+                            <input type="submit" value="Search!" />
+                        </form>
+                    </div>
+                </>
 
-                        <input type="submit" value="Search!" />
-                    </form>
-                </div>
+                
         
             
             }

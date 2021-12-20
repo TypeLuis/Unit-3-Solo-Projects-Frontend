@@ -35,6 +35,7 @@ const AnimeDetails = () => {
 
                 // gets the data from the response
                 const pictures = response.pictures
+                console.log('pictures' , pictures)
 
                 // "[...new Set()]" allows makes a nested array of the data mapped
                 const pictureImgs = [...new Set(pictures.map((item) => {
@@ -47,6 +48,8 @@ const AnimeDetails = () => {
                     return allItems
         
                 }))]
+
+                console.log('pictureImgs' , pictureImgs)
 
                 // sets responseState to the [...new Set()] array
                 setResponse(pictureImgs)
@@ -117,7 +120,7 @@ const AnimeDetails = () => {
 
             case 'recommendations' : 
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}/${page}`)
 
                 response = await fetchResponse.json()
                 
@@ -139,7 +142,7 @@ const AnimeDetails = () => {
 
     // https://stackoverflow.com/questions/56649094/how-to-reload-a-component-part-of-page-in-reactjs
     // page will reload whenever data is updated.
-    useEffect(()=>{loadAnimeDetails()}, [page])
+    useEffect(()=>{loadAnimeDetails()}, [page, request])
 
 
     return (
@@ -150,21 +153,21 @@ const AnimeDetails = () => {
             <>
                 {parseInt(page) > 1 && 
                 
-                    <Link to={`/${id}/${request}/${page > 0 && parseInt(page) - 1}`} ><button>back</button></Link>
+                    <Link to={`/anime/${id}/${request}/${page > 0 && parseInt(page) - 1}`} ><button>back</button></Link>
                 }
                 
                 {parseInt(page) < pageLimit &&
                     
-                    <Link to={`/${id}/${request}/${parseInt(page) + 1}`} ><button >next</button></Link>
+                    <Link to={`/anime/${id}/${request}/${parseInt(page) + 1}`} ><button >next</button></Link>
                 }
                 
             </>
         
-        }
+            }
 
             {response.map((item, i) => {
                 
-                const switchCompontents = () => {
+                const switchComponents = () => {
 
                     switch(request){
 
@@ -185,19 +188,17 @@ const AnimeDetails = () => {
                                 </div>
                         )
 
-
-
                         case 'pictures' :
 
                             const photoUrl = item[0]
+
+                            // console.log('photoUrl', photoUrl)
 
                             return (
                                 <div>
                                     <img src={photoUrl} />
                                 </div>
                         )
-
-
 
                         case 'characters_staff' :
 
@@ -227,7 +228,6 @@ const AnimeDetails = () => {
                                 </div>
                         )
 
-
                         case 'recommendations' :
 
                             const recommendImage = item[0]
@@ -236,10 +236,11 @@ const AnimeDetails = () => {
 
                             return (
                                 <div >
-                                    <Link to={`/${recommendMalId}`} onClick={()=>{loadAnimeDetails('recommendations')}}> <h1> {recommendTitle} </h1> </Link>
+                                    <Link to={`/anime/${recommendMalId}`}> <h1> {recommendTitle} </h1> </Link>
                                     <img src={recommendImage} />
                                 </div>
-                            )
+                        )
+            
                     }
                 }
                 
@@ -247,8 +248,7 @@ const AnimeDetails = () => {
                 return(
                     
                     <>
-                        
-                        {switchCompontents()}
+                        {switchComponents()}
                     </>
                     
 

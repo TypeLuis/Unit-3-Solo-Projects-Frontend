@@ -6,27 +6,46 @@ import { useState, useContext, useEffect } from 'react'
 import './Header.css'
 
 const Header = () => {
-    console.log(window.location.pathname.split('/')[1])
-    const currentWindow = window.location.pathname.split('/')[1]
+    console.log('window',window.location.pathname.split('/')[2])
+    const currentWindow = window.location.pathname.split('/')[2]
     console.log(currentWindow)
 
-    const {pageState} = useContext(UserContext)
+    const {pageState, userState} = useContext(UserContext)
+    const [ user, setUser ] = userState
 
     const [pageId , setPageId] = pageState
     console.log(pageId)
 
 
-    useEffect(()=>{}, [pageId])
+    // useEffect(()=>{}, [pageId])
 
-
-    console.log(<Route path='/:id'/>)
 
     return (
         <nav className='navbar'>
 
-            <Link to='/signup' onClick={setPageId(NaN)} >Signup</Link>
+            { user.id ?
+            
+                
 
-            <Link to='/login' >login</Link>
+                <div className='userShows'>
+                    <Link to={`/favorites`}>Favorites</Link>
+                    <Link to={`/watched`}>Watched</Link>
+                    <Link to='/login' onClick={() => {setUser({}); localStorage.removeItem('userId')}} >Logout</Link>
+                </div>
+        
+            :
+                <>
+
+                <Link to='/signup' onClick={setPageId(NaN)} >Signup</Link>
+
+                <Link to='/login' >login</Link>
+                
+                </>
+        
+            }
+
+
+
 
             <Link to='/search' >Search</Link>
 
@@ -37,14 +56,18 @@ const Header = () => {
                 </button>
 
                 <div className="dropdown-content">
-                    <Link to={``}>tv</Link>
-                    <Link to={``}>airing</Link>
-                    <Link to={``}>upcoming</Link>
+                    <Link to={`/top/tv/1`}>tv</Link>
+                    <Link to={`/top/airing/1`}>airing</Link>
+                    <Link to={`/top/upcoming/1`}>upcoming</Link>
+                    <Link to={`/top/movie/1`}>Movie</Link>
+                    <Link to={`/top/special/1`}>special</Link>
+                    <Link to={`/top/ova/1`}>ova</Link>
                 </div>
 
             </div>
 
-            {currentWindow === pageId ?
+            {/* current window's id is equal to context pageId */}
+            {currentWindow === pageId &&
 
                 <div className='dropdown'>
 
@@ -53,20 +76,22 @@ const Header = () => {
                     </button>
 
                     <div className="dropdown-content">
-                        <Link to={`/${pageId}/episodes/1`}>episodes</Link>
-                        <Link to={`/${pageId}/pictures`}>pictures</Link>
-                        <Link to={`/${pageId}/characters_staff`}>characters_staff</Link>
-                        <Link to={`/${pageId}/videos`}>videos</Link>
-                        <Link to={`/${pageId}/recommendations`}>recommendations</Link>
+                        <Link to={`/anime/${pageId}/episodes/1`}>episodes</Link>
+                        <Link to={`/anime/${pageId}/pictures`}>pictures</Link>
+                        <Link to={`/anime/${pageId}/characters_staff`}>characters</Link>
+                        <Link to={`/anime/${pageId}/videos`}>videos</Link>
+                        <Link to={`/anime/${pageId}/recommendations`}>recommendations</Link>
+                        <Link to={`/anime/${pageId}`}>Anime Page</Link>
                     </div>
 
                 </div>
                
-                :
-
-                console.log('bye')
         
             }
+
+            
+
+
 
         </nav>
     )
