@@ -2,6 +2,14 @@
   margin: 0px;
   padding: 0px;
 }
+<<<<<<< HEAD
+=======
+
+.header-margin {
+  margin-top: 45px;
+}
+
+>>>>>>> 339108502cbc677f65de6ac1126564225f1afbdb
 .App {
   text-align: center;
 }

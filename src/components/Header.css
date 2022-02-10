@@ -3,17 +3,20 @@
 
 /* Navbar container */
 .navbar {
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #333;
   font-family: Arial;
+  height: 46px;
 
   /* always positions navbar at the top */
   /* https://www.codegrepper.com/code-examples/css/how+to+make+nav+bar+stay+on+screen+while+scrolling */
   z-index: 50;
+  /* position: sticky; */
   position: fixed;
-  top: 0px;
+  top: 0;
+  /* left: 0; */
   width: 100%;
-  /* max-height: 5vh; */
+  /* margin-bottom: 30px; */
 }
 
 /* Links inside the navbar */
@@ -54,6 +57,7 @@
 .dropdown-content {
   display: none;
   position: absolute;
+  overflow: visible;
 
   background-color: #f9f9f9;
   min-width: 160px;
@@ -78,8 +82,13 @@
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
+  /* position: relative; */
   display: block;
   z-index: 100;
+}
+
+.dropdown:hover .navbar {
+  overflow: visible;
 }
 
 .userShows {
