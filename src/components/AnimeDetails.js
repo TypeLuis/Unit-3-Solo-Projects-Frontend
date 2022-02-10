@@ -120,7 +120,7 @@ const AnimeDetails = () => {
 
             case 'recommendations' : 
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}/${page}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
 
                 response = await fetchResponse.json()
                 
@@ -147,6 +147,8 @@ const AnimeDetails = () => {
 
     return (
         <div>
+
+            <h1>{request}</h1>
 
             {request === 'episodes' &&
             
@@ -248,6 +250,7 @@ const AnimeDetails = () => {
                 return(
                     
                     <>
+                        
                         {switchComponents()}
                     </>
                     

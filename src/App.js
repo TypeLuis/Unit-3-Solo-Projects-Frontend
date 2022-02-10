@@ -16,6 +16,7 @@ import { useState, useContext, useEffect } from 'react'
 import WatchedAnime from './pages/WatchedAnime';
 import SearchLogo from './components/SearchLogo';
 import TopAnime from './components/TopAnime';
+import FaveChart from './pages/FaveChart';
 
 function App() {
 
@@ -48,8 +49,13 @@ function App() {
   return (
     <div className="App">
 
+
+      
       <Header />
 
+      <div className='header-margin'>
+
+      </div>
 
       <Routes>
 
@@ -72,6 +78,9 @@ function App() {
             <Login />
         } />
 
+
+
+        <Route path='/chart' element={<FaveChart />} />
 
         <Route path='/search' element={<SearchAnime />} />
 

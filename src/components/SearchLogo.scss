@@ -1,0 +1,127 @@
+#App-logo {
+  height: 40vmin;
+  width: 40vmin;
+  display: flex;
+  justify-items: center;
+  margin: auto;
+  margin-top: 15px;
+  padding-block: 10px;
+  /* display: flex; */
+}
+
+#logo-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; 
+
+  width: 50vw;
+  // height: 50vh;
+}
+
+.function-buttons {
+  display: flex;
+  margin-block: 5vh; 
+  /* justify-content: center; */
+  gap: 1rem;
+  flex-direction: row;
+  justify-content: space-around;
+  @media (max-width: 900px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(20px, 120px));
+    gap: 1rem;
+  }
+}
+
+.function-buttons button {
+  /* margin: 0 15px; */
+  padding: 0 20px; 
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: Min(4vw, 1rem);
+  height: 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #000;
+  background: #a3910b94;
+  text-shadow: 1px 0 0.2em hsl(0, 0%, 100% / 0.6), 0 1px 0.2em #000;
+
+  box-shadow: inset 0 0 0.5em 0 #a3910b, 0 0 0.3em 0 #a3910b;
+  position: relative;
+
+  transition: background-color 100ms linear;
+
+}
+
+.function-buttons button:hover {
+  background: #a3910b;
+}
+
+.function-buttons button::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  background: #a3910b;
+  border-radius: 50px;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(2em) rotateX(20deg) scale(1, 0.3);
+  filter: blur(2em);
+}
+
+.function-buttons button::after {
+  content: "";
+  position: absolute;
+  border-radius: 70px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background-color: burlywood; */
+  box-shadow: 0 0 2em 0.5em #a3910b94;
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+
+.function-buttons button:hover:after {
+  opacity: 1;
+}
+
+#images {
+  padding: 0 15px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #c4c4c4;
+  background: #9e55a656;
+  border: none;
+}
+
+#images option {
+  color: #000;
+}
+
+/* name for key frames can be named anything */
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes App-logo-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
