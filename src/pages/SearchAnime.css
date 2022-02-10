@@ -1,0 +1,107 @@
+#anime-search {
+  padding: 10px 30px;
+  width: 405px;
+  height: 20px;
+
+  background: #99566286;
+  border-radius: 1em;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  /* position: relative; */
+}
+
+#search-form label {
+  position: relative;
+}
+
+#search-form label::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: url(../logos/Pokeball.svg) center / contain no-repeat;
+}
+
+#search-submit {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 30px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  width: 220px;
+  height: 60px;
+  border-radius: 70px;
+  color: #0e2752;
+  background: #924e996e;
+
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.6), 0 0 0.125em #0e2752;
+
+  box-shadow: inset 0 0 0.5em 0 #924e99, 0 0 0.5em 0 #924e99;
+
+  position: relative;
+}
+
+#search-submit:hover {
+  background: #924e9998;
+}
+
+#search-submit::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  display: block;
+  background: #924e99;
+  border-radius: 70px;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(1em) rotateX(40deg) scale(1, 0.25);
+  filter: blur(2em);
+  opacity: 0.7;
+}
+
+#search-submit::after {
+  content: "";
+  position: absolute;
+  border-radius: 70px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background-color: burlywood; */
+  box-shadow: 0 0 2em 0.5em #924e99;
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+
+#search-submit:hover:after {
+  opacity: 1;
+}
+
+.search-results {
+  margin-top: 50px;
+}
+
+.search-results div {
+  display: flex;
+  margin: 10px 30vw;
+  border: 2px solid white;
+  /* width: 60vw; */
+}
+
+.search-results p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #acb498;
+}

@@ -21,7 +21,7 @@ import './SearchLogo.css'
 
 const SearchLogo = () => {
 
-    const [logo, setLogo] = useState(pokeBall)
+    const [logo, setLogo] = useState(dragonBall)
     const [animation, setAnimation] = useState('App-logo-spin infinite 20s cubic-bezier(1,0.39,1,1)')
     const [playState, setPlayState] = useState('running')
 
@@ -123,11 +123,12 @@ const SearchLogo = () => {
 
     return (
         <div id='logo-container'>
-            <select onChange={(e) => {imageList(e)}} name='logo' id='images'>
+            <select onChange={(e) => {imageList(e); e.target.style.color = '#000000'}} name='logo' id='images'>
+                <option disabled selected hidden>Select a logo!</option>
+                <option value={dragonBall}>Dragon Ball</option>
                 <option value={strawHats}>straw Hats</option>
                 <option value={zoroLogo}>zoro</option>
                 <option value={chopperLogo}>Chopper</option>
-                <option value={dragonBall}>Dragon Ball</option>
                 <option value={pokeBall}>PokeBall</option>
                 <option value={demonLogo}>Demon Slayer</option>
                 <option value={leafVillage}>Naruto</option>

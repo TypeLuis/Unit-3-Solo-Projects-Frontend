@@ -86,28 +86,48 @@ const AnimePage = () => {
                 </div>
             }
 
+            <div className='anime-page'>
 
-            <a href={response.url}> <h1>{response.title}</h1> </a>
-            <span> Score: {response.score}</span>
-            <div>
-                <a href={`${response.image_url}`}> <img src={response.image_url} /> </a>
+                <div className='page-image-title'>
+
+                    <a href={response.url}> <h1 className='page-title'>{response.title}</h1> </a>
+                    
+
+                    <div className='page-image'>
+                        <a href={`${response.image_url}`}> <img src={response.image_url} /> </a>
+                    </div>
+
+                </div>
+
+                
+                <div className='page-content'>
+
+                    <div className='page-synopsis'>
+                        <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
+
+                    </div>
+                    
+                    <div className='page-details'>
+                        <span className='page-score'> Score: {response.score}</span>
+                        <span>premiered: {response.premiered} <br /> </span>
+                        <span>status: {response.status} <br /> </span>
+                        <span>rating: {response.rating} <br /> </span>
+                        <span>broadcast: {response.broadcast} <br /> </span>
+                    </div>
+
+                </div>
+                
+                
+
+
+
+                <div className='page-trailer'>
+                    <h1>{response.title} Trailer:</h1>
+                    <iframe src={response.trailer_url}></iframe>
+                </div>
+
             </div>
             
-            <p>{response.synopsis}</p>
-
-            <div>
-                <span>premiered: {response.premiered} <br /> </span>
-                <span>status: {response.status} <br /> </span>
-                <span>rating: {response.rating} <br /> </span>
-                <span>broadcast: {response.broadcast} <br /> </span>
-            </div>
-
-
-
-            <div>
-                <h1>{response.title} Trailer:</h1>
-                <iframe src={response.trailer_url}></iframe>
-            </div>
             
         </div>
     )

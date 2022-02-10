@@ -16,6 +16,7 @@ import { useState, useContext, useEffect } from 'react'
 import WatchedAnime from './pages/WatchedAnime';
 import SearchLogo from './components/SearchLogo';
 import TopAnime from './components/TopAnime';
+import FaveChart from './pages/FaveChart';
 
 function App() {
 
@@ -72,6 +73,9 @@ function App() {
             <Login />
         } />
 
+
+
+        <Route path='/chart' element={<FaveChart />} />
 
         <Route path='/search' element={<SearchAnime />} />
 

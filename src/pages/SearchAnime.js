@@ -6,6 +6,7 @@ import axios from 'axios'
 import env from 'react-dotenv'
 import { Link } from 'react-router-dom'
 import SearchLogo from '../components/SearchLogo'
+import './SearchAnime.css'
 
 const SearchAnime = () => {
 
@@ -50,7 +51,7 @@ const SearchAnime = () => {
 
 
     return (
-        <div>
+        <div className='search-anime-page'>
 
             {toggle ?
 
@@ -59,13 +60,16 @@ const SearchAnime = () => {
 
                      {animeList.map((item, i)=>{
                          return (
-                            <div>
+                            <div className='search-results'>
                                 
                                 
                                 <Link to={`/anime/${item.mal_id}`}> <h1>{item.title}</h1> </Link>
-                                <span>{item.mal_id}</span>
-                                <p>{item.synopsis}</p>
-                                <img src={item.image_url} alt={item.title} />
+                                
+                                <div>
+                                    <img src={item.image_url} alt={item.title} />
+                                    <p>{item.synopsis}</p>
+                                </div>
+                                
             
                             </div>
                          )
@@ -79,11 +83,15 @@ const SearchAnime = () => {
                     <SearchLogo />
 
                     <div>
-                        <form onSubmit={submitForm}>
-                            <label htmlFor="anime-search">Search Anime:</label>
-                            <input id='anime-search' value={anime} onChange={(e) => setAnime(e.target.value)}/>
+                        <form id='search-form' onSubmit={submitForm}>
+                            <label htmlFor="anime-search"></label>
+                            <input placeholder='Search for an Anime' id='anime-search' value={anime} onChange={(e) => {setAnime(e.target.value); e.target.style.background = '#99566286'}}/>
 
-                            <input type="submit" value="Search!" />
+                            <div className='submit-div'>
+                                <button id="search-submit">Search!</button>
+                                {/* <input id="search-submit" type="submit" value="Search!" /> */}
+                            </div>
+                            
                         </form>
                     </div>
                 </>

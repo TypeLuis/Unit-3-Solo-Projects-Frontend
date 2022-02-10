@@ -34,11 +34,12 @@ const Header = () => {
                 </div>
         
             :
+            
                 <>
 
-                <Link to='/signup' onClick={setPageId(NaN)} >Signup</Link>
+                    <Link to='/signup' onClick={setPageId(NaN)} >Signup</Link>
 
-                <Link to='/login' >login</Link>
+                    <Link to='/login' >login</Link>
                 
                 </>
         
