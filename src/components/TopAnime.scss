@@ -1,0 +1,39 @@
+.top-anime{
+    margin: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  align-items: flex-start;
+  
+  .top-anime-details{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    
+    .top-anime-span{
+        font-weight: bold;
+        font-family: roboto;
+        font-size: Min(4vmin, 1rem);
+        display: flex;
+        flex-direction: column;
+        gap: .25em;
+    }
+    
+    .top-anime-card{
+        height: 300px;
+        // width: Min(30vw, 400px);
+        padding: 1rem;
+        background-color: #5052B5;
+        border-radius: .75em;
+        margin: auto;
+
+      img {
+          width: 70%;
+          aspect-ratio: 16 /9;
+          object-fit: contain;
+          object-position: top;
+      }
+  }
+}

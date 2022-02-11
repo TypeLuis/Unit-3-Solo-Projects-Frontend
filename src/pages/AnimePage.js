@@ -6,7 +6,7 @@ import axios from 'axios'
 import env from 'react-dotenv'
 import watchFunction from '../Functions/WatchFunctions'
 import faveFunctions from '../Functions/FaveFunctions'
-import './AnimePage.css'
+import './AnimePage.scss'
 
 
 const AnimePage = () => {

@@ -58,22 +58,25 @@ const SearchAnime = () => {
                 <>
                     <button onClick={() => { setToggle(false) }} >Go Back</button>
 
-                    {animeList.map((item, i) => {
-                        return (
-                            <div className='search-results'>
+                    <div className='search-content'>
+
+                        {animeList.map((item, i) => {
+                            return (
+                                <div className='search-results'>
 
 
-                                <Link to={`/anime/${item.mal_id}`}> <h1>{item.title}</h1> </Link>
+                                    <Link to={`/anime/${item.mal_id}`}> <h1>{item.title}</h1> </Link>
 
-                                <div>
-                                    <img src={item.image_url} alt={item.title} />
-                                    <p>{item.synopsis}</p>
+                                    <div>
+                                        <img src={item.image_url} alt={item.title} />
+                                        <p>{item.synopsis}</p>
+                                    </div>
+
+
                                 </div>
-
-
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
                 </>
 
                 :

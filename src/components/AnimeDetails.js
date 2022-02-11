@@ -1,15 +1,17 @@
 import React from 'react'
 import { UserContext } from "../context/UserContext"
 import { useState, useContext, useEffect } from 'react'
-import {Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import './AnimeDetails.scss'
+import Pagination from './Pagination'
 
 
 const AnimeDetails = () => {
-    const {id, request, page} = useParams()
+    const { id, request, page } = useParams()
 
-    const {pageState} = useContext(UserContext)
-    const [pageId , setPageId] = pageState
+    const { pageState } = useContext(UserContext)
+    const [pageId, setPageId] = pageState
 
     setPageId(id)
 
@@ -26,8 +28,8 @@ const AnimeDetails = () => {
         let fetchResponse
         let response
 
-        switch(request){
-            case 'pictures' :
+        switch (request) {
+            case 'pictures':
 
                 fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
 
@@ -35,7 +37,7 @@ const AnimeDetails = () => {
 
                 // gets the data from the response
                 const pictures = response.pictures
-                console.log('pictures' , pictures)
+                console.log('pictures', pictures)
 
                 // "[...new Set()]" allows makes a nested array of the data mapped
                 const pictureImgs = [...new Set(pictures.map((item) => {
@@ -46,18 +48,18 @@ const AnimeDetails = () => {
 
                     // returns array to nested arrays
                     return allItems
-        
+
                 }))]
 
-                console.log('pictureImgs' , pictureImgs)
+                console.log('pictureImgs', pictureImgs)
 
                 // sets responseState to the [...new Set()] array
                 setResponse(pictureImgs)
-            break
+                break
 
 
-            case 'episodes' : 
-                
+            case 'episodes':
+
                 fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}/${page}`)
 
                 response = await fetchResponse.json()
@@ -74,11 +76,11 @@ const AnimeDetails = () => {
                 }))]
 
                 setResponse(epi)
-            break
+                break
 
 
 
-            case 'characters_staff' : 
+            case 'characters_staff':
 
 
                 fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
@@ -94,11 +96,11 @@ const AnimeDetails = () => {
                 }))]
 
                 setResponse(allCharacters)
-            break
+                break
 
 
 
-            case 'videos' :
+            case 'videos':
 
                 fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
 
@@ -114,16 +116,16 @@ const AnimeDetails = () => {
                 }))]
 
                 setResponse(videoPromotions)
-            break
+                break
 
 
 
-            case 'recommendations' : 
+            case 'recommendations':
 
                 fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
 
                 response = await fetchResponse.json()
-                
+
                 const recommends = response.recommendations
                 console.log('recommendations', response.recommendations)
 
@@ -133,130 +135,163 @@ const AnimeDetails = () => {
                 }))]
 
                 setResponse(recommendations)
-            break
+                break
         }
 
 
-    } 
+    }
 
 
     // https://stackoverflow.com/questions/56649094/how-to-reload-a-component-part-of-page-in-reactjs
     // page will reload whenever data is updated.
-    useEffect(()=>{loadAnimeDetails()}, [page, request])
+    useEffect(() => { loadAnimeDetails() }, [page, request])
+
+    const url = `/anime/${id}/${request}`
 
 
     return (
         <div>
-
             <h1>{request}</h1>
 
-            {request === 'episodes' &&
-            
-            <>
-                {parseInt(page) > 1 && 
-                
-                    <Link to={`/anime/${id}/${request}/${page > 0 && parseInt(page) - 1}`} ><button>back</button></Link>
-                }
-                
-                {parseInt(page) < pageLimit &&
-                    
-                    <Link to={`/anime/${id}/${request}/${parseInt(page) + 1}`} ><button >next</button></Link>
-                }
-                
-            </>
-        
-            }
+            <div className={`${request} content-page`}>
 
-            {response.map((item, i) => {
-                
-                const switchComponents = () => {
 
-                    switch(request){
+                {request === 'episodes' &&
 
-                        case 'episodes' :
-
-                            const episodeTitle = item[0]
-                            const episodeVideo = item[1]
-                            const episodeId = item[2]
-                            const episodeFiller = item[3]
-                            const episodeRecap = item[4]
-
-                            return(
-                                <div>
-                                    <h2>episode {episodeId}</h2>
-                                    <span>filler: {episodeFiller ? <span>yes</span> : <span>no</span>} <br /></span>
-                                    <span>recap: {episodeRecap ? <span>yes</span> : <span>no</span>} <br /></span>
-                                    <a href={episodeVideo}><h1>{episodeTitle}</h1></a>        
-                                </div>
-                        )
-
-                        case 'pictures' :
-
-                            const photoUrl = item[0]
-
-                            // console.log('photoUrl', photoUrl)
-
-                            return (
-                                <div>
-                                    <img src={photoUrl} />
-                                </div>
-                        )
-
-                        case 'characters_staff' :
-
-                            const characterName = item[0]
-                            const characterUrl = item[1]
-                            const characterRole = item[2]
-
-                            return(
-                                <div>
-                                    <h1>{characterName}</h1>
-                                    <h2>Role : {characterRole}</h2>
-                                    <img src={characterUrl} />
-                                </div>
-                        )
-                                
-                        case 'videos' :
-
-                            const videoTitle = item[0]
-                            const video = item[1]
-
-                            return (
-                                <div>
-                                    <h1>{videoTitle}</h1>
-                                    <div>
-                                        <iframe src={video}></iframe>
-                                    </div>
-                                </div>
-                        )
-
-                        case 'recommendations' :
-
-                            const recommendImage = item[0]
-                            const recommendTitle = item[1]
-                            const recommendMalId = item[2]
-
-                            return (
-                                <div >
-                                    <Link to={`/anime/${recommendMalId}`}> <h1> {recommendTitle} </h1> </Link>
-                                    <img src={recommendImage} />
-                                </div>
-                        )
-            
-                    }
-                }
-                
-
-                return(
-                    
                     <>
-                        
-                        {switchComponents()}
-                    </>
-                    
+                        {/* {parseInt(page) > 1 &&
 
-                )
-            })}
+                            <Link to={`/anime/${id}/${request}/${page > 0 && parseInt(page) - 1}`} ><button>back</button></Link>
+                        }
+
+                        {parseInt(page) < pageLimit &&
+
+                            <Link to={`/anime/${id}/${request}/${parseInt(page) + 1}`} ><button >next</button></Link>
+                        } */}
+
+                        <Pagination page={page} url={url} pageLimit={pageLimit} />
+
+                    </>
+
+                }
+
+                {request === 'pictures' &&
+
+                    <>
+                        <div className='slide-track'>
+                            {response.map((item, i) => {
+                                return (
+
+                                    <div key={i} className='slide'>
+
+
+                                        <img src={item[0]} />
+
+                                    </div>
+                                )
+
+                            })}
+                            {response.map((item, i) => {
+                                return (
+
+                                    <div key={i} className='slide'>
+
+
+                                        <img src={item[0]} />
+
+                                    </div>
+                                )
+
+                            })}
+                        </div>
+                    </>
+
+                }
+
+                {response.map((item, i) => {
+
+                    const SwitchComponents = () => {
+
+                        switch (request) {
+
+                            case 'episodes':
+
+                                const episodeTitle = item[0]
+                                const episodeVideo = item[1]
+                                const episodeId = item[2]
+                                const episodeFiller = item[3]
+                                const episodeRecap = item[4]
+
+                                return (
+                                    <div>
+                                        <h2>episode {episodeId}</h2>
+                                        <span>filler: {episodeFiller ? <span>yes</span> : <span>no</span>} <br /></span>
+                                        <span>recap: {episodeRecap ? <span>yes</span> : <span>no</span>} <br /></span>
+                                        <a href={episodeVideo}><h1>{episodeTitle}</h1></a>
+                                    </div>
+                                )
+
+                            case 'pictures':
+                                return (
+                                    <></>
+                                )
+
+                            case 'characters_staff':
+
+                                const characterName = item[0]
+                                const characterUrl = item[1]
+                                const characterRole = item[2]
+
+                                return (
+                                    <div>
+                                        <h1>{characterName}</h1>
+                                        <h2>Role : {characterRole}</h2>
+                                        <img src={characterUrl} />
+                                    </div>
+                                )
+
+                            case 'videos':
+
+                                const videoTitle = item[0]
+                                const video = item[1]
+
+                                return (
+                                    <div>
+                                        <h1>{videoTitle}</h1>
+                                        <div>
+                                            <iframe src={video}></iframe>
+                                        </div>
+                                    </div>
+                                )
+
+                            case 'recommendations':
+
+                                const recommendImage = item[0]
+                                const recommendTitle = item[1]
+                                const recommendMalId = item[2]
+
+                                return (
+                                    <div className='recomend-page'>
+                                        <Link to={`/anime/${recommendMalId}`}> <h1> {recommendTitle} </h1> </Link>
+                                        <img src={recommendImage} />
+                                    </div>
+                                )
+
+                        }
+                    }
+
+
+                    return (
+
+                        <>
+
+                            <SwitchComponents />
+                        </>
+
+
+                    )
+                })}
+            </div>
         </div>
     )
 }
