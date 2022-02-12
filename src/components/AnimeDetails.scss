@@ -93,3 +93,12 @@
 
     100% {transform: translateX(-3em * 10);}
 }
+
+.videos div{
+    margin-top: 2rem;
+    iframe {
+      aspect-ratio: 16 / 9;
+      // height: 30vh;
+      width: Min(70vw, 800px);
+    }
+}

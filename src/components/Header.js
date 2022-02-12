@@ -6,14 +6,14 @@ import { useState, useContext, useEffect } from 'react'
 import './Header.css'
 
 const Header = () => {
-    console.log('window',window.location.pathname.split('/')[2])
+    console.log('window', window.location.pathname.split('/')[2])
     const currentWindow = window.location.pathname.split('/')[2]
     console.log(currentWindow)
 
-    const {pageState, userState} = useContext(UserContext)
-    const [ user, setUser ] = userState
+    const { pageState, userState } = useContext(UserContext)
+    const [user, setUser] = userState
 
-    const [pageId , setPageId] = pageState
+    const [pageId, setPageId] = pageState
     console.log(pageId)
 
 
@@ -23,32 +23,34 @@ const Header = () => {
     return (
         <nav className='navbar'>
 
-            { user.id ?
-            
-                
+            {user.id ?
+
+
 
                 <div className='userShows'>
                     <Link to={`/favorites`}>Favorites</Link>
                     <Link to={`/watched`}>Watched</Link>
-                    <Link to='/login' onClick={() => {setUser({}); localStorage.removeItem('userId')}} >Logout</Link>
+                    <Link to='/login' onClick={() => { setUser({}); localStorage.removeItem('userId') }} >Logout</Link>
                 </div>
-        
-            :
-            
+
+                :
+
                 <>
 
                     <Link to='/signup' onClick={setPageId(NaN)} >Signup</Link>
 
                     <Link to='/login' >login</Link>
-                
+
+
                 </>
-        
+
             }
 
 
 
 
             <Link to='/search' >Search</Link>
+            <Link to='/chart'>Chart</Link>
 
             <div className='dropdown'>
 
@@ -86,11 +88,11 @@ const Header = () => {
                     </div>
 
                 </div>
-               
-        
+
+
             }
 
-            
+
 
 
 
