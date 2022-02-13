@@ -1,0 +1,108 @@
+
+
+
+
+@media screen and (min-width: 800px) {
+  
+  /* How to create a drop down navbar */
+  /* https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp */
+  
+  /* Navbar container */
+  // .navbar-small{
+  //   display: none;
+  // }
+  .navbar-big {
+    /* overflow: hidden; */
+    background-color: #333;
+    font-family: Arial;
+    height: 46px;
+  
+    /* always positions navbar at the top */
+    /* https://www.codegrepper.com/code-examples/css/how+to+make+nav+bar+stay+on+screen+while+scrolling */
+    z-index: 50;
+    /* position: sticky; */
+    position: fixed;
+    top: 0;
+    /* left: 0; */
+    width: 100%;
+  
+    & a {
+  
+      /* Links inside the navbar */
+      float: left;
+      font-size: 16px;
+      color: white;
+      text-align: center;
+      padding: 14px 16px; 
+      text-decoration: none;
+    }
+  
+  
+    .dropdown-big {
+      float: left;
+      overflow: hidden;
+  
+      & .dropbtn{
+  
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit; /* Important for vertical align on mobile phones */
+        margin: 0; /* Important for vertical align on mobile phones */
+      }
+    }
+  
+  }
+  
+  /* Add a red background color to navbar links on hover */
+  .navbar-big a:hover,
+  .dropdown-big:hover .dropbtn {
+    background-color: red;
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    overflow: visible;
+  
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+  
+    & a {
+  
+      /* Links inside the dropdown */
+      float: none;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+  
+      &:hover {
+        background-color: #ddd;
+  
+      }
+    }
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown-big:hover .dropdown-content {
+    /* position: relative; */
+    display: block;
+    z-index: 100;
+  }
+  
+  .dropdown-big:hover .navbar-big {
+    overflow: visible;
+  }
+  
+  .userShows {
+    float: right;
+  }
+}

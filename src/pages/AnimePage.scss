@@ -1,9 +1,20 @@
 .toggle-div {
   background-color: slategray;
   height: 3em;
+  width: 100vw;
   display: flex;
   justify-content: space-around;
+
+
+  @media screen and (max-width: 700px) {
+    .outline-text{
+      display: none;
+    }
+  }
+
 }
+
+
 
 .watchOutline,
 .faveOutline {

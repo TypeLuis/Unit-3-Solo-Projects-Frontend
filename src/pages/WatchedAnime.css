@@ -1,6 +1,7 @@
 .item-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .item-div {
@@ -20,9 +21,9 @@
 }
 
 .item-text {
-  height: 150px;
+  height: 300px;
   width: 300px;
-  margin-top: 50%;
+  margin-top: 0%;
   background-color: rgba(0, 0, 0, 0.493);
   display: none;
 }

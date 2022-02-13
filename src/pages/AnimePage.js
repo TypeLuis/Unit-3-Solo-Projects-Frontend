@@ -72,20 +72,20 @@ const AnimePage = () => {
 
 
                         <>
-                            <span className="watchOutline" onClick={() => { watchFunction.deleteWatched(animeId, setWatchIds, setWatched); faveFunctions.deleteFave(animeId, setFaveIds, setFave) }}>Watched ✅</span>
+                            <span className="watchOutline" onClick={() => { watchFunction.deleteWatched(animeId, setWatchIds, setWatched); faveFunctions.deleteFave(animeId, setFaveIds, setFave) }}><span className='outline-text'>Watched</span> ✅</span>
 
                             {faveFunctions.checkFave(faveIds, animeId) ?
 
-                                <span className="faveOutline" onClick={() => faveFunctions.deleteFave(animeId, setFaveIds, setFave)}>Favored ❤️</span>
+                                <span className="faveOutline" onClick={() => faveFunctions.deleteFave(animeId, setFaveIds, setFave)}><span className='outline-text'>Favored</span>❤️</span>
 
                                 :
 
-                                <span className="faveOutline" onClick={() => faveFunctions.faveAnime(animeId, image, title, setFaveIds, setFave)}>Add to Favorite ♡</span>
+                                <span className="faveOutline" onClick={() => faveFunctions.faveAnime(animeId, image, title, setFaveIds, setFave)}><span className='outline-text'>Add to Favorite</span>♡</span>
                             }
 
                         </>
                         :
-                        <span className="watchOutline" onClick={() => watchFunction.watchedAnime(animeId, image, title, setWatchIds, setWatched)}>Watch ☑</span>
+                        <span className="watchOutline" onClick={() => watchFunction.watchedAnime(animeId, image, title, setWatchIds, setWatched)}><span className='outline-text'>Watch</span>☑</span>
 
                     }
 

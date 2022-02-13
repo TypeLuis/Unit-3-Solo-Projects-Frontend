@@ -17,13 +17,14 @@ import WatchedAnime from './pages/WatchedAnime';
 import SearchLogo from './components/SearchLogo';
 import TopAnime from './components/TopAnime';
 import FaveChart from './pages/FaveChart';
+import HeaderSmall from './components/HeaderSmall';
 
 function App() {
 
-  const {pageState, userState} = useContext(UserContext)
+  const { pageState, userState } = useContext(UserContext)
   const [user, setUser] = userState
 
-  const [pageId , setPageId] = pageState
+  const [pageId, setPageId] = pageState
 
   setPageId(0)
 
@@ -43,15 +44,15 @@ function App() {
 
   }
 
-  useEffect(() => { fetchUser() }, [])
+  useEffect(() => { fetchUser(); console.log(user) }, [])
 
 
   return (
     <div className="App">
 
 
-      
-      <Header />
+      <HeaderSmall />
+      {/* <Header /> */}
 
       <div className='header-margin'>
 
@@ -60,13 +61,13 @@ function App() {
       <Routes>
 
 
-        <Route path='/*' element={<Navigate to={'/search'} />}/>
+        <Route path='/*' element={<Navigate to={'/search'} />} />
 
 
         <Route path='/signup' element={
           user.id ?
             <Navigate to='/search' />
-          :
+            :
             <Signup />
         } />
 
@@ -74,7 +75,7 @@ function App() {
         <Route path='/login' element={
           user.id ?
             <Navigate to='/search' />
-          :
+            :
             <Login />
         } />
 
@@ -86,15 +87,15 @@ function App() {
 
         <Route path='/anime/:id' element={<AnimePage />} />
 
-        <Route path='/anime/:id/:request' element={<AnimeDetails />}  />
+        <Route path='/anime/:id/:request' element={<AnimeDetails />} />
 
-        <Route path='/anime/:id/:request/:page' element={<AnimeDetails />}  />
+        <Route path='/anime/:id/:request/:page' element={<AnimeDetails />} />
 
 
         <Route path='/favorites' element={
           user.id ?
             <FavedAnime />
-          :
+            :
             <Navigate to='/login' />
         } />
 
@@ -102,15 +103,15 @@ function App() {
         <Route path='/watched' element={
           user.id ?
             <WatchedAnime />
-          :
+            :
             <Navigate to='/login' />
-          
+
         } />
 
 
         <Route path='/logo' element={<SearchLogo />} />
 
-        <Route path= '/top/:subtype/:page' element={<TopAnime />} />
+        <Route path='/top/:subtype/:page' element={<TopAnime />} />
 
 
       </Routes>

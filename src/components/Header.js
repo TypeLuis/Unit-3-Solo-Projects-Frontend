@@ -3,25 +3,19 @@ import { Link, Route } from 'react-router-dom'
 import AnimePage from '../pages/AnimePage'
 import { UserContext } from "../context/UserContext"
 import { useState, useContext, useEffect } from 'react'
-import './Header.css'
+import './Header.scss'
 
 const Header = () => {
-    console.log('window', window.location.pathname.split('/')[2])
     const currentWindow = window.location.pathname.split('/')[2]
-    console.log(currentWindow)
 
     const { pageState, userState } = useContext(UserContext)
     const [user, setUser] = userState
 
     const [pageId, setPageId] = pageState
-    console.log(pageId)
-
-
-    // useEffect(()=>{}, [pageId])
 
 
     return (
-        <nav className='navbar'>
+        <nav className='navbar-big'>
 
             {user.id ?
 
@@ -52,11 +46,9 @@ const Header = () => {
             <Link to='/search' >Search</Link>
             <Link to='/chart'>Chart</Link>
 
-            <div className='dropdown'>
+            <div className='dropdown-big'>
 
-                <button className="dropbtn">Top Anime
-                    <i className="fa fa-caret-down"></i>
-                </button>
+                <button className="dropbtn">Top Anime</button>
 
                 <div className="dropdown-content">
                     <Link to={`/top/tv/1`}>tv</Link>
@@ -72,11 +64,9 @@ const Header = () => {
             {/* current window's id is equal to context pageId */}
             {currentWindow === pageId &&
 
-                <div className='dropdown'>
+                <div className='dropdown-big'>
 
-                    <button className="dropbtn">Anime Details
-                        <i className="fa fa-caret-down"></i>
-                    </button>
+                    <button className="dropbtn">Anime Details</button>
 
                     <div className="dropdown-content">
                         <Link to={`/anime/${pageId}/episodes/1`}>episodes</Link>
@@ -89,12 +79,7 @@ const Header = () => {
 
                 </div>
 
-
             }
-
-
-
-
 
         </nav>
     )
