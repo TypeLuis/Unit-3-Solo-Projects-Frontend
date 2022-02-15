@@ -19,12 +19,24 @@ import { ReactComponent as MOMO } from '../logos/MOMO.svg';
 import { ReactComponent as NOFACE } from '../logos/NOFACE.svg';
 
 function HeaderSmall() {
+    const { pageState } = useContext(UserContext)
+
+    const [pageId, setPageId] = pageState
+    const currentWindow = window.location.pathname.split('/')[2]
+
     return (
         <Navbar>
 
-            <NavItem icon={<CaretIcon className='nav-event' />}>
+            <NavItem event='main' icon={<CaretIcon className='nav-event nav-control' />}>
                 <DropdownMenu></DropdownMenu>
             </NavItem>
+
+            {currentWindow === pageId &&
+                <NavItem event='Anime Details' icon={<CaretIcon className='nav-event nav-control' />}>
+                    <DropdownMenu></DropdownMenu>
+                </NavItem>
+            }
+
         </Navbar>
     );
 }
@@ -40,53 +52,103 @@ function Navbar(props) {
 function NavItem(props) {
     const [open, setOpen] = useState(false);
     const [content, setContent] = useState(false)
+    const [event, setEvent] = useState('')
+    const icon = useRef(null)
 
-    window.onclick = function (event) {
-        if (event.target.classList[0] != 'nav-event') {
+    // icon.current.addEventListener('click', (e) => {
+    //     console.log(e)
+    // })
+    // console.log(icon.current)
+
+    // setTimeout(() => {
+
+    // }, 500)
+
+
+    const handleOpenClick = (e) => {
+        e.preventDefault()
+        setTimeout(() => {
+
+            window.onclick = function (e) {
+                if (e.target.classList[0] != 'nav-event') {
+                    console.log('hi')
+                    setContent(false)
+                    setTimeout(() => { setOpen(false) }, 400)
+                }
+                // if (open === true) {
+
+
+                //     if (icon.current.classList[1] === 'nav-control') {
+                //         console.log(icon)
+                //         console.log('bye')
+                //         setContent(false)
+                //         setTimeout(() => { setOpen(false) }, 400)
+                //     }
+                // }
+                else if (e.target.classList[1] === ('true')) {
+                    console.log('transition')
+                    // setOpen(true)
+                    // setContent(true)
+                }
+                else if (icon.current.classList.contains('true') && icon.current.classList.contains('nav-control')) {
+                    console.log(e)
+                    console.log('bye')
+                    setContent(false)
+                    setTimeout(() => { setOpen(false) }, 400)
+                    console.log(icon)
+                }
+            }
+        }, 100)
+
+        // console.log(e)
+        // icon.current.className += ' active'
+        // while (target.id != 'icon') {
+        //     target = e.target.parentNode
+        //     console.log(target)
+        // }
+
+        // console.log(icon)
+
+        if (open === true) {
             setContent(false)
             setTimeout(() => { setOpen(false) }, 400)
         }
-    }
-
-    const handleOpenClick = () => {
-        if (open === true) {
-            setContent(!content)
-            setTimeout(() => { setOpen(!open) }, 400)
-        }
         else {
-            setOpen(!open)
-            setContent(!content)
+            setTimeout(() => {
+
+                setEvent(props.event)
+                setOpen(true)
+                setContent(true)
+            }, 200)
         }
+
+        console.log(open)
     }
 
     return (
-        <li className="nav-event nav-item">
-            <a href="#" className="nav-event icon-button" id='icon' onClick={() => { handleOpenClick() }}>
+        <li ref={icon} className={`nav-event nav-control ${open} nav-item`}>
+            <a href="#" className="nav-event nav-control icon-button" id='icon' onClick={(e) => { handleOpenClick(e) }}>
                 {props.icon}
             </a>
 
             {/* {open && props.children} */}
             {/* https://stackoverflow.com/questions/64732498/how-to-pass-a-prop-to-children-in-react */}
-            {open && React.cloneElement(props.children, { content: content })}
+            {open && React.cloneElement(props.children, { content: content, event: event, open: open })}
         </li>
     );
 }
 
 function DropdownMenu(props) {
-    const [activeMenu, setActiveMenu] = useState('main');
+    const [activeMenu, setActiveMenu] = useState(props.event);
     const [menuHeight, setMenuHeight] = useState(null);
     const { pageState, userState } = useContext(UserContext)
     const [user, setUser] = userState
 
     const [pageId, setPageId] = pageState
-    const currentWindow = window.location.pathname.split('/')[2]
 
 
     const dropdownRef = useRef(null);
 
-    useEffect(() => {
-        console.log(props.content)
-    })
     useEffect(() => {
         setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
     }, [])
@@ -115,7 +177,7 @@ function DropdownMenu(props) {
 
 
 
-                    <a href='#' className="nav-event menu-item" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+                    <a href='#' className={`nav-event ${props.open} menu-item`} onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
                         <span className="nav-event icon-button">{props.leftIcon}</span>
                         {props.children}
                         <span className="nav-event icon-right">{props.rightIcon}</span>
@@ -173,18 +235,21 @@ function DropdownMenu(props) {
                     <DropdownItem
                         leftIcon={<PlusIcon />}
                         rightIcon={<ChevronIcon />}
-                        goToMenu="Top Anime">
+                        goToMenu="Top Anime"
+                        open={props.open}
+
+                    >
                         Top Anime
                     </DropdownItem>
 
-                    {currentWindow === pageId &&
+                    {/* {currentWindow === pageId &&
                         <DropdownItem
                             leftIcon={<PlusIcon />}
                             rightIcon={<ChevronIcon />}
                             goToMenu="Anime Details">
                             Anime Details
                         </DropdownItem>
-                    }
+                    } */}
 
 
 
@@ -193,7 +258,8 @@ function DropdownMenu(props) {
 
 
 
-            {/* SETTINGS */}
+
+            {/* Top Anime */}
             <CSSTransition
                 in={activeMenu === 'Top Anime'}
                 timeout={500}
@@ -201,8 +267,8 @@ function DropdownMenu(props) {
                 unmountOnExit
                 onEnter={calcHeight}>
                 <div className="nav-event menu">
-                    <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-                        <h2 className='nav-event'>Top Anime</h2>
+                    <DropdownItem goToMenu="main" open={props.open} leftIcon={<ArrowIcon />}>
+                        <h2 className={`nav-event ${props.open}`}>Top Anime</h2>
                     </DropdownItem>
 
                     <DropdownItem dropLink='/top/tv/1' leftIcon={<MOMO />}>TV</DropdownItem>
@@ -220,23 +286,23 @@ function DropdownMenu(props) {
             </CSSTransition>
 
 
-            {/* ANIMALS */}
+            {/* Anime Details */}
             <CSSTransition
                 in={activeMenu === 'Anime Details'}
                 timeout={500}
-                classNames="nav-event menu-secondary"
+                classNames="nav-event menu-primary"
                 unmountOnExit
                 onEnter={calcHeight}>
                 <div className="nav-event menu">
-                    <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
+                    {/* <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
                         <h2 className='nav-event'>Anime Details</h2>
-                    </DropdownItem>
+                    </DropdownItem> */}
 
                     <DropdownItem dropLink={`/anime/${pageId}/episodes/1`} leftIcon={<NOFACE />}>Episodes</DropdownItem>
 
                     <DropdownItem dropLink={`/anime/${pageId}/pictures`} leftIcon={<NOFACE />}>Pictures</DropdownItem>
 
-                    <DropdownItem dropLink={`/anime/${pageId}/characters_staff`} leftIcon={<NOFACE />}>Characters?</DropdownItem>
+                    <DropdownItem dropLink={`/anime/${pageId}/characters_staff`} leftIcon={<NOFACE />}>Characters</DropdownItem>
 
                     <DropdownItem dropLink={`/anime/${pageId}/videos`} leftIcon={<NOFACE />} >Videos</DropdownItem>
 
