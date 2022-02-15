@@ -27,12 +27,12 @@ function HeaderSmall() {
     return (
         <Navbar>
 
-            <NavItem event='main' icon={<CaretIcon className='nav-event nav-control' />}>
+            <NavItem menu='main' icon={<CaretIcon className='nav-event nav-control' />}>
                 <DropdownMenu></DropdownMenu>
             </NavItem>
 
             {currentWindow === pageId &&
-                <NavItem event='Anime Details' icon={<CaretIcon className='nav-event nav-control' />}>
+                <NavItem menu='Anime Details' icon={<CaretIcon className='nav-event nav-control' />}>
                     <DropdownMenu></DropdownMenu>
                 </NavItem>
             }
@@ -52,77 +52,47 @@ function Navbar(props) {
 function NavItem(props) {
     const [open, setOpen] = useState(false);
     const [content, setContent] = useState(false)
-    const [event, setEvent] = useState('')
     const icon = useRef(null)
 
-    // icon.current.addEventListener('click', (e) => {
-    //     console.log(e)
-    // })
-    // console.log(icon.current)
 
-    // setTimeout(() => {
-
-    // }, 500)
-
-
+    // determines if dropdown is open or closed
     const handleOpenClick = (e) => {
         e.preventDefault()
+        // this setTimeout needs to be run before the setTimeout where we set states to True
+
+        // The reason for this is because the icon reference is looking for a class name that contains true
         setTimeout(() => {
 
+            // The window on click is inside the handle click because we need to recall it everytime the button is clicked
             window.onclick = function (e) {
+                // each class name has an event to toggle
+                console.log(icon)
+
+                // if user clicks on element that doesn't contain 'nav-event' as it's first class name
                 if (e.target.classList[0] != 'nav-event') {
                     console.log('hi')
                     setContent(false)
+
+                    // this setTimeOut is here to let the animation of dropdown fade out
                     setTimeout(() => { setOpen(false) }, 400)
                 }
-                // if (open === true) {
 
 
-                //     if (icon.current.classList[1] === 'nav-control') {
-                //         console.log(icon)
-                //         console.log('bye')
-                //         setContent(false)
-                //         setTimeout(() => { setOpen(false) }, 400)
-                //     }
-                // }
-                else if (e.target.classList[1] === ('true')) {
-                    console.log('transition')
-                    // setOpen(true)
-                    // setContent(true)
-                }
-                else if (icon.current.classList.contains('true') && icon.current.classList.contains('nav-control')) {
-                    console.log(e)
-                    console.log('bye')
+                // if the icon refrence has a class name of true which is determined by the open state and if the element clicked has a class named 'nav control'
+                else if (icon.current.classList.contains('true') && e.target.classList.contains('nav-control')) {
                     setContent(false)
                     setTimeout(() => { setOpen(false) }, 400)
-                    console.log(icon)
                 }
             }
         }, 100)
 
-        // console.log(e)
-        // icon.current.className += ' active'
-        // while (target.id != 'icon') {
-        //     target = e.target.parentNode
-        //     console.log(target)
-        // }
-
-        // console.log(icon)
-
-        if (open === true) {
-            setContent(false)
-            setTimeout(() => { setOpen(false) }, 400)
-        }
+        if (open === true) { }
         else {
             setTimeout(() => {
-
-                setEvent(props.event)
                 setOpen(true)
                 setContent(true)
             }, 200)
         }
-
-        console.log(open)
     }
 
     return (
@@ -133,13 +103,13 @@ function NavItem(props) {
 
             {/* {open && props.children} */}
             {/* https://stackoverflow.com/questions/64732498/how-to-pass-a-prop-to-children-in-react */}
-            {open && React.cloneElement(props.children, { content: content, event: event, open: open })}
+            {open && React.cloneElement(props.children, { content: content, menu: props.menu })}
         </li>
     );
 }
 
 function DropdownMenu(props) {
-    const [activeMenu, setActiveMenu] = useState(props.event);
+    const [activeMenu, setActiveMenu] = useState(props.menu);
     const [menuHeight, setMenuHeight] = useState(null);
     const { pageState, userState } = useContext(UserContext)
     const [user, setUser] = userState
@@ -177,7 +147,7 @@ function DropdownMenu(props) {
 
 
 
-                    <a href='#' className={`nav-event ${props.open} menu-item`} onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+                    <a href='#' className={`nav-event menu-item`} onClick={(e) => { e.preventDefault(); props.goToMenu && setActiveMenu(props.goToMenu) }}>
                         <span className="nav-event icon-button">{props.leftIcon}</span>
                         {props.children}
                         <span className="nav-event icon-right">{props.rightIcon}</span>
@@ -236,8 +206,6 @@ function DropdownMenu(props) {
                         leftIcon={<PlusIcon />}
                         rightIcon={<ChevronIcon />}
                         goToMenu="Top Anime"
-                        open={props.open}
-
                     >
                         Top Anime
                     </DropdownItem>
@@ -267,8 +235,8 @@ function DropdownMenu(props) {
                 unmountOnExit
                 onEnter={calcHeight}>
                 <div className="nav-event menu">
-                    <DropdownItem goToMenu="main" open={props.open} leftIcon={<ArrowIcon />}>
-                        <h2 className={`nav-event ${props.open}`}>Top Anime</h2>
+                    <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
+                        <h2 className={`nav-event`}>Top Anime</h2>
                     </DropdownItem>
 
                     <DropdownItem dropLink='/top/tv/1' leftIcon={<MOMO />}>TV</DropdownItem>
