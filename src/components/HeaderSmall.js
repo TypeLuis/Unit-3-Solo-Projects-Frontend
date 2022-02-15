@@ -66,7 +66,6 @@ function NavItem(props) {
             // The window on click is inside the handle click because we need to recall it everytime the button is clicked
             window.onclick = function (e) {
                 // each class name has an event to toggle
-                console.log(icon)
 
                 // if user clicks on element that doesn't contain 'nav-event' as it's first class name
                 if (e.target.classList[0] != 'nav-event') {
