@@ -4,6 +4,7 @@ import { useState, useContext }  from 'react'
 import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 import env from 'react-dotenv'
+import './userSign.scss'
 
 const Login = () => {
 
@@ -29,7 +30,7 @@ const Login = () => {
           await setUser(response.data.user)
   
           // Set userId into localStorage
-          await localStorage.setItem('userId', response.data.user.id)
+          localStorage.setItem('userId', response.data.user.id)
         } catch (error) {
           console.log('Error:', error.message)
         }
@@ -37,22 +38,22 @@ const Login = () => {
 
 
     return (
-        <div>
-            <form onSubmit={submitForm}>
-
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className='sign-page'>
+            <form className='login-box' onSubmit={submitForm}>
+                <h1>Login</h1>
+                <div className='textbox'>
+                    <label htmlFor="email"></label>
+                    <input value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
 
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <div className='textbox'>
+                    <label htmlFor="password"></label>
+                    <input type="Password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
 
-                <input type="submit" value="Log In!" />
+                <input className='btn' type="submit" value="Log In!" />
 
             </form>
         </div>
