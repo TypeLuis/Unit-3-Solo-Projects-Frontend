@@ -1,3 +1,4 @@
+// @import "~bootstrap/scss/bootstrap";
 .recommendations {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -17,7 +18,7 @@
 }
 
 .pictures {
-//   height: Min(100vh, 2000px);
+  //   height: Min(100vh, 2000px);
   height: 60vh;
   margin: auto;
   position: relative;
@@ -29,8 +30,8 @@
   .slide-track {
     display: flex;
     height: 50vh;
-    width: 3em * 50;
-    font-size: 25vh *2/3;
+    width: 2em * 50 * 2 / 3;
+    font-size: 25vh * 2 / 3;
     animation: scroll 30s linear infinite;
 
     &:hover {
@@ -39,7 +40,7 @@
   }
 
   .slide {
-    width: 3em;
+    width: 2em;
     display: flex;
     align-items: center;
     padding: 15px;
@@ -54,7 +55,7 @@
 
       transition: transform 1s;
       &:hover {
-        transform: translateZ(.03em);
+        transform: translateZ(0.03em);
         cursor: pointer;
       }
     }
@@ -108,54 +109,54 @@
   }
 }
 
+.episode-page {
+  margin: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5em;
+  align-items: flex-start;
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rosybrown;
+    height: 400px;
+    padding: 0.5em;
+    width: 300px;
+    box-shadow: 3px 3px 4px 1px #4caf50;
 
-.episode-page{
-    margin: 1em;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5em;
-    align-items: flex-start;
-    .card{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: rosybrown;
-        height: 400px;
-        padding: .5em;
-        width: 300px;
-        box-shadow: 3px 3px 4px 1px #4caf50;
-
-        h2 {
-            margin-block: 20px;
-            // float: left;
-        }
-
-        .filler, .recap {
-            font-size: 1.3em;
-            display: flex;
-            // float: left;
-        }
-
-        .episode-link{
-            margin-top: 10px;
-            width: max-content;
-            .episode-btn{
-                 --color: hsl(500, 30%, 50%);
-                background: var(--color);
-                color: white;
-                border: none;
-                height: 37px;
-                font-size: 1rem;
-                padding: 0.5em 0.75em;
-                border-radius: 0.25em;
-                cursor: pointer;
-    
-                &:hover {
-                background: hsl(500, 30%, 60%);
-                // border-radius: 2em;
-                }
-            }
-        }
+    h2 {
+      margin-block: 20px;
+      // float: left;
     }
+
+    .filler,
+    .recap {
+      font-size: 1.3em;
+      display: flex;
+      // float: left;
+    }
+
+    .episode-link {
+      margin-top: 10px;
+      width: max-content;
+      .episode-btn {
+        --color: hsl(500, 30%, 50%);
+        background: var(--color);
+        color: white;
+        border: none;
+        height: 37px;
+        font-size: 1rem;
+        padding: 0.5em 0.75em;
+        border-radius: 0.25em;
+        cursor: pointer;
+
+        &:hover {
+          background: hsl(500, 30%, 60%);
+          // border-radius: 2em;
+        }
+      }
+    }
+  }
 }
