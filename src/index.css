@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #0e2752;
+  /* min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  background: url(./logos/bg.jpg) no-repeat;
+  background-size: cover; */
 }
 
 code {
