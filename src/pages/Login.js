@@ -42,18 +42,19 @@ const Login = () => {
             <form className='login-box' onSubmit={submitForm}>
                 <h1>Login</h1>
                 <div className='textbox'>
-                    <label htmlFor="email"></label>
+                    <label className='email' htmlFor="email"></label>
                     <input value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
 
                 <div className='textbox'>
-                    <label htmlFor="password"></label>
+                    <label className='password' htmlFor="password"></label>
                     <input type="Password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
 
-                <input className='btn' type="submit" value="Log In!" />
+                {/* <input className='btn' type="submit" value="Log In!" /> */}
+                <button className='btn' type="submit">Log in!</button>
 
             </form>
         </div>

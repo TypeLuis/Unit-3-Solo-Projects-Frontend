@@ -43,23 +43,25 @@ const Signup = () => {
                 <h1>Sign up</h1>
 
                 <div className='textbox'>
-                    <label htmlFor="name"></label>
+                    <label className='username' htmlFor="name"></label>
                     <input value={name} placeholder='Username' onChange={(e) => setName(e.target.value)} />
                 </div>
 
                 <div className='textbox'>
-                    <label htmlFor="email"></label>
+                    <label className='email' htmlFor="email"></label>
                     <input value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
 
                 <div className='textbox'>
-                    <label htmlFor="password"></label>
+                    <label className='password' htmlFor="password"></label>
                     <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
 
-                <input className='btn' type="submit" value="Sign Up!" />
+                {/* <input className='btn' type="submit" value="Sign Up!" /> */}
+                
+                <button className='btn' type="submit">Sign Up!</button>
 
             </form>
         </div>
