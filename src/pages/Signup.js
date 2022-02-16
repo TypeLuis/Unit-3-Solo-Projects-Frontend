@@ -8,12 +8,12 @@ import env from 'react-dotenv'
 const Signup = () => {
 
     const { userState, pageState } = useContext(UserContext)
-    const [ user, setUser ] = userState
+    const [user, setUser] = userState
 
-    const [pageId , setPageId] = pageState
-  
+    const [pageId, setPageId] = pageState
+
     setPageId(0)
-  
+
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -44,12 +44,12 @@ const Signup = () => {
 
                 <div className='textbox'>
                     <label className='username' htmlFor="name"></label>
-                    <input value={name} placeholder='Username' onChange={(e) => setName(e.target.value)} />
+                    <input value={name} placeholder='Username' onChange={(e) => { setName(e.target.value); e.target.style.background = 'none' }} />
                 </div>
 
                 <div className='textbox'>
                     <label className='email' htmlFor="email"></label>
-                    <input value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+                    <input value={email} placeholder='Email' onChange={(e) => { setEmail(e.target.value); e.target.style.background = 'none' }} />
                 </div>
 
 
@@ -60,7 +60,7 @@ const Signup = () => {
 
 
                 {/* <input className='btn' type="submit" value="Sign Up!" /> */}
-                
+
                 <button className='btn' type="submit">Sign Up!</button>
 
             </form>

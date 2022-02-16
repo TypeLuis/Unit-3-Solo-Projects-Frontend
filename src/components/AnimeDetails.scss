@@ -17,20 +17,21 @@
 }
 
 .pictures {
+//   height: Min(100vh, 2000px);
   height: 60vh;
   margin: auto;
   position: relative;
-  width: 95%;
+  width: 90%;
   display: grid;
   place-items: center;
   overflow: hidden;
 
   .slide-track {
     display: flex;
-    height: 100%;
-    width: 100%;
-    font-size: 10vh;
-    animation: scroll 10s linear infinite;
+    height: 50vh;
+    width: 3em * 50;
+    font-size: 25vh *2/3;
+    animation: scroll 30s linear infinite;
 
     &:hover {
       animation-play-state: paused;
@@ -48,11 +49,12 @@
       width: 100%;
       height: 100%;
       aspect-ratio: 16 / 9;
+      overflow: hidden;
       object-fit: cover;
 
       transition: transform 1s;
       &:hover {
-        transform: translateZ(15px);
+        transform: translateZ(.03em);
         cursor: pointer;
       }
     }
@@ -104,4 +106,56 @@
     // height: 30vh;
     width: Min(70vw, 800px);
   }
+}
+
+
+.episode-page{
+    margin: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5em;
+    align-items: flex-start;
+    .card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rosybrown;
+        height: 400px;
+        padding: .5em;
+        width: 300px;
+        box-shadow: 3px 3px 4px 1px #4caf50;
+
+        h2 {
+            margin-block: 20px;
+            // float: left;
+        }
+
+        .filler, .recap {
+            font-size: 1.3em;
+            display: flex;
+            // float: left;
+        }
+
+        .episode-link{
+            margin-top: 10px;
+            width: max-content;
+            .episode-btn{
+                 --color: hsl(500, 30%, 50%);
+                background: var(--color);
+                color: white;
+                border: none;
+                height: 37px;
+                font-size: 1rem;
+                padding: 0.5em 0.75em;
+                border-radius: 0.25em;
+                cursor: pointer;
+    
+                &:hover {
+                background: hsl(500, 30%, 60%);
+                // border-radius: 2em;
+                }
+            }
+        }
+    }
 }

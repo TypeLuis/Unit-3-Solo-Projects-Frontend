@@ -60,7 +60,7 @@ function NavItem(props) {
         e.preventDefault()
         // this setTimeout needs to be run before the setTimeout where we set states to True
 
-        // The reason for this is because the icon reference is looking for a class name that contains true
+        // The reason for this is because the icon reference is looking for a class name that contains true and the window.click references the state before
         setTimeout(() => {
 
             // The window on click is inside the handle click because we need to recall it everytime the button is clicked
