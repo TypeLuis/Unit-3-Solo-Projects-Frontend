@@ -66,45 +66,7 @@ const AnimePage = () => {
     return (
         <div>
 
-<Carousel>
-  <Carousel.Item style={{background: `url(${response.image_url})`}}>
-    <img
-      className=""
-      src="https://cdn.myanimelist.net/images/anime/12/28553.jpg"
-      alt="First slide"
-    />
-    <h1>KLK MANI</h1>
-    <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <div className='page-synopsis'>
-      <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
-    </div>
 
-
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-  <div className='page-details'>
-    <span className='page-score'> Score: {response.score}</span>
-    <span>premiered: {response.premiered} <br /> </span>
-    <span>status: {response.status} <br /> </span>
-    <span>rating: {response.rating} <br /> </span>
-    <span>broadcast: {response.broadcast} <br /> </span>
-  </div>
-
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-</Carousel>
 
             {user.id &&
                 <div className='toggle-div'>
@@ -147,7 +109,50 @@ const AnimePage = () => {
                 </div>
 
 
-                <div className='page-content'>
+                <Carousel>
+  {/* <Carousel.Item style={{background: `url(${response.image_url})`}}>
+    <img
+      className=""
+      src="https://cdn.myanimelist.net/images/anime/12/28553.jpg"
+      alt="First slide"
+    />
+    <h1>KLK MANI</h1>
+    <Carousel.Caption>
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </Carousel.Caption>
+  </Carousel.Item> */}
+  <Carousel.Item>
+    <div className='page-synopsis'>
+      <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
+    </div>
+
+  </Carousel.Item>
+  <Carousel.Item>
+  <div className='page-details'>
+    <div>
+
+      <h1>Details</h1>
+      <span className='page-score detail-name'> Score: <span className='detail-response'> {response.score}</span> <br /></span>
+      
+      <span className='detail-name'> premiered: <span className='detail-response'>  {response.premiered}</span> <br /> </span>
+
+      <span className='detail-name'>status: <span className='detail-response'>  {response.status}</span>  <br /> </span>
+
+      <span className='detail-name'>rating: <span className='detail-response'>  {response.rating}</span> <br /> </span>
+
+      <span className='detail-name'>broadcast: <span className='detail-response'> {response.broadcast}</span> <br /> </span>
+
+      <span className='detail-name'>type: <span className='detail-response'>  {response.type}</span> <br /> </span>
+
+    </div>
+  </div>
+
+  </Carousel.Item>
+</Carousel>
+
+
+                {/* <div className='page-content'>
 
                     <div className='page-synopsis'>
                         <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
@@ -162,7 +167,7 @@ const AnimePage = () => {
                         <span>broadcast: {response.broadcast} <br /> </span>
                     </div>
 
-                </div>
+                </div> */}
 
 
 
