@@ -67,23 +67,23 @@ const AnimePage = () => {
         <div>
 
 <Carousel>
-  <Carousel.Item>
+  <Carousel.Item style={{background: `url(${response.image_url})`}}>
     <img
       className=""
       src="https://cdn.myanimelist.net/images/anime/12/28553.jpg"
       alt="First slide"
     />
+    <h1>KLK MANI</h1>
     <Carousel.Caption>
       <h3>First slide label</h3>
       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Second slide&bg=282c34"
-      alt="Second slide"
-    />
+    <div className='page-synopsis'>
+      <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
+    </div>
+
 
     <Carousel.Caption>
       <h3>Second slide label</h3>
@@ -91,11 +91,13 @@ const AnimePage = () => {
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Third slide&bg=20232a"
-      alt="Third slide"
-    />
+  <div className='page-details'>
+    <span className='page-score'> Score: {response.score}</span>
+    <span>premiered: {response.premiered} <br /> </span>
+    <span>status: {response.status} <br /> </span>
+    <span>rating: {response.rating} <br /> </span>
+    <span>broadcast: {response.broadcast} <br /> </span>
+  </div>
 
     <Carousel.Caption>
       <h3>Third slide label</h3>

@@ -1,5 +1,13 @@
 @import url(./__carousel.scss);
 
+.carousel-item {
+  height: 32rem;
+  background: #777;
+  background-size: cover;
+  // background-repeat: no-repeat;
+  // object-fit: cover;
+}
+
 .toggle-div {
   background-color: slategray;
   height: 3em;
