@@ -163,15 +163,19 @@ function DropdownMenu(props) {
     }
 
     return (
+        // props.content is refering if the content is showing is true, making this className a boolean in which we can toggle the fade in and out animation in css
         <div className={`nav-event ${props.content} dropdown-small`} id='dropDown' style={{ height: menuHeight }} ref={dropdownRef}>
 
 
             {/* Main */}
+            {/* CSS Transitition gives us 4 different classnames we can use to toggle transitionss */}
             <CSSTransition
+                // checks if condition is true to transition to this component
                 in={activeMenu === 'main'}
                 timeout={500}
                 classNames="nav-event menu-primary"
                 unmountOnExit
+                // give functions on enter
                 onEnter={calcHeight}>
                 <div className="nav-event menu">
                     <DropdownItem leftIcon={<Pokeball />} dropLink='/search'>Search</DropdownItem>
@@ -230,6 +234,7 @@ function DropdownMenu(props) {
             <CSSTransition
                 in={activeMenu === 'Top Anime'}
                 timeout={500}
+                // gives this the secondary menu because it's transitioning from primary
                 classNames="nav-event menu-secondary"
                 unmountOnExit
                 onEnter={calcHeight}>
