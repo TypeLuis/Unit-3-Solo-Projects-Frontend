@@ -1,7 +1,7 @@
 # Anime-Api-Search
 
-# Error in contributions
-Jennie and Will worked on another project with me. Somehow commits to the project got mixed with this one
+# Error in Contributors
+Jennie Lai and William Naval worked on another project with me. Somehow commits to that project got mixed with this one
 
 ## Overview
 
