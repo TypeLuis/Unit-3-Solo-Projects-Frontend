@@ -1,5 +1,8 @@
 # Anime-Api-Search
 
+# Error in Contributors
+Jennie Lai and William Naval worked on another project with me. Somehow commits to that project got mixed with this one
+
 ## Overview
 
 This projects is about making an website that allows users to search they're favorite anime. The website would let the user register and login to their own account. Once login to their account, the user would be able to favorite their anime and write a review about the anime too. They are also able to see all the information about said anime including episodes etc. 
