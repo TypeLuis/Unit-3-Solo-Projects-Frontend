@@ -11,7 +11,7 @@ watchFunction.fetchWatchedAnime = async (setWatchIds, setWatched) => {
     try {
         const options = {
             method: 'GET',
-            url: `${env.BACKEND_URL}/watched`,
+            url: `${process.env.BACKEND_URL}/watched`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             }
@@ -22,17 +22,17 @@ watchFunction.fetchWatchedAnime = async (setWatchIds, setWatched) => {
 
         let Ids = []
 
-        for (let watch of response.data.getAllWatched){
+        for (let watch of response.data.getAllWatched) {
             Ids.push(watch.animeId)
         }
 
         console.log(response.data.getAllWatched)
-        
+
         setWatched(response.data.getAllWatched)
         setWatchIds(Ids)
-    } 
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 
@@ -40,21 +40,21 @@ watchFunction.watchedAnime = async (animeId, image, title, setWatchIds, setWatch
     try {
         const options = {
             method: 'POST',
-            url: `${env.BACKEND_URL}/watched/${animeId}`,
+            url: `${process.env.BACKEND_URL}/watched/${animeId}`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             },
             data: {
-                imageUrl : image,
-                title : title,
+                imageUrl: image,
+                title: title,
             }
         };
         const response = await axios.request(options)
         watchFunction.fetchWatchedAnime(setWatchIds, setWatched)
         console.log(response)
-    } 
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 
@@ -62,7 +62,7 @@ watchFunction.deleteWatched = async (animeId, setWatchIds, setWatched) => {
     try {
         const options = {
             method: 'DELETE',
-            url: `${env.BACKEND_URL}/watched/${animeId}`,
+            url: `${process.env.BACKEND_URL}/watched/${animeId}`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             }
@@ -70,10 +70,10 @@ watchFunction.deleteWatched = async (animeId, setWatchIds, setWatched) => {
         const response = await axios.request(options)
         watchFunction.fetchWatchedAnime(setWatchIds, setWatched)
         console.log(response)
-        
-    } 
+
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 
@@ -87,9 +87,9 @@ watchFunction.checkWatched = (watchIds, animeId) => {
             return true
         }
         return false
-    } 
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 

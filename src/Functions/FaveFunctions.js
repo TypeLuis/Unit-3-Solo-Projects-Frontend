@@ -1,7 +1,7 @@
 import React from 'react'
 import { UserContext } from "../context/UserContext"
 import { useState, useContext, useEffect } from 'react'
-import {Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import env from 'react-dotenv'
 
@@ -13,7 +13,7 @@ faveFunctions.fetchFaveAnime = async (setFaveIds, setFave) => {
     try {
         const options = {
             method: 'GET',
-            url: `${env.BACKEND_URL}/fave`,
+            url: `${process.env.BACKEND_URL}/fave`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             }
@@ -24,17 +24,17 @@ faveFunctions.fetchFaveAnime = async (setFaveIds, setFave) => {
 
         let Ids = []
 
-        for (let fave of response.data.faveAnimes){
+        for (let fave of response.data.faveAnimes) {
             Ids.push(fave.animeId)
         }
 
         console.log(response)
-        
+
         setFave(response.data.faveAnimes)
         setFaveIds(Ids)
-    } 
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 
@@ -47,16 +47,16 @@ faveFunctions.faveAnime = async (animeId, image, title, setFaveIds, setFave) => 
                 Authorization: localStorage.getItem('userId')
             },
             data: {
-                imageUrl : image,
-                title : title,
+                imageUrl: image,
+                title: title,
             }
         };
         const response = await axios.request(options)
         faveFunctions.fetchFaveAnime(setFaveIds, setFave)
         console.log(response)
-    } 
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 
@@ -72,10 +72,10 @@ faveFunctions.deleteFave = async (animeId, setFaveIds, setFave) => {
         const response = await axios.request(options)
         faveFunctions.fetchFaveAnime(setFaveIds, setFave)
         console.log(response)
-        
-    } 
+
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 
@@ -89,9 +89,9 @@ faveFunctions.checkFave = (faveIds, animeId) => {
             return true
         }
         return false
-    } 
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 

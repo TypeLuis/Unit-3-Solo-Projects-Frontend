@@ -23,7 +23,7 @@ const Signup = () => {
         try {
             e.preventDefault()
 
-            const response = await axios.post(`${env.BACKEND_URL}/user`, { name, email, password })
+            const response = await axios.post(`${process.env.BACKEND_URL}/user`, { name, email, password })
 
             console.log(response)
 

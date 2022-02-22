@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useState, useContext }  from 'react'
+import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 import env from 'react-dotenv'
@@ -11,30 +11,30 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { userState, pageState } = useContext(UserContext)
-    const [ user, setUser ] = userState
+    const [user, setUser] = userState
 
-    const [pageId , setPageId] = pageState
-  
+    const [pageId, setPageId] = pageState
+
     setPageId(0)
 
 
     const submitForm = async (e) => {
         try {
-          e.preventDefault()
-          // Pulls user from backend
-          const response = await axios.post(`${env.BACKEND_URL}/user/login`, { email, password })
-            
-          console.log(response)
+            e.preventDefault()
+            // Pulls user from backend
+            const response = await axios.post(`${process.env.BACKEND_URL}/user/login`, { email, password })
 
-          // Sets user through useContext
-          await setUser(response.data.user)
-  
-          // Set userId into localStorage
-          localStorage.setItem('userId', response.data.user.id)
+            console.log(response)
+
+            // Sets user through useContext
+            await setUser(response.data.user)
+
+            // Set userId into localStorage
+            localStorage.setItem('userId', response.data.user.id)
         } catch (error) {
-          console.log('Error:', error.message)
+            console.log('Error:', error.message)
         }
-      }
+    }
 
 
     return (
