@@ -6,7 +6,7 @@ import { Doughnut, Bar, Pie } from 'react-chartjs-2';
 import React from 'react'
 import { UserContext } from "../context/UserContext"
 import { useState, useContext, useEffect } from 'react'
-import {Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import env from 'react-dotenv'
 import './FaveChart.css'
@@ -25,6 +25,7 @@ const FaveChart = () => {
 
     async function getFavorites() {
         const response = await axios.get(`${env.BACKEND_URL}/fave/all`);
+        console.log(env.BACKEND_URL)
         console.log(response)
         setFavorites(response.data.Favorites);
     }
@@ -34,9 +35,9 @@ const FaveChart = () => {
 
     const random_rgba = () => {
         const o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
     }
-    
+
 
 
     const test = () => {
@@ -45,13 +46,13 @@ const FaveChart = () => {
 
         let allFavorites = []
 
-        for (let fav of favorites){
+        for (let fav of favorites) {
             allFavorites.push(fav.title)
         }
 
         // // prints a list of all user's region
         // // console.log(allFavorites)
-        
+
 
         // // returns array of each unique data type
         let set = new Set(allFavorites);
@@ -64,7 +65,7 @@ const FaveChart = () => {
             // https://stackoverflow.com/questions/37365512/count-the-number-of-times-a-same-value-appears-in-a-javascript-array
             const count = allFavorites.filter(x => x === entry).length
             nameAmount.push(count)
-            console.log(entry+":", count);
+            console.log(entry + ":", count);
         }
 
         const bgList = [...new Set(names.map((item) => {
@@ -80,7 +81,7 @@ const FaveChart = () => {
 
     }
 
-    useEffect(()=>{test()}, [favorites]);
+    useEffect(() => { test() }, [favorites]);
 
 
     const data = {
@@ -127,7 +128,7 @@ const FaveChart = () => {
                     }}
                 />
             </div>
-            
+
         </div>
     )
 }
