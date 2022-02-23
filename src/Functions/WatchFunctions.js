@@ -11,7 +11,7 @@ watchFunction.fetchWatchedAnime = async (setWatchIds, setWatched) => {
     try {
         const options = {
             method: 'GET',
-            url: `${process.env.BACKEND_URL}/watched`,
+            url: `${env.BACKEND_URL}/watched`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             }
@@ -40,7 +40,7 @@ watchFunction.watchedAnime = async (animeId, image, title, setWatchIds, setWatch
     try {
         const options = {
             method: 'POST',
-            url: `${process.env.BACKEND_URL}/watched/${animeId}`,
+            url: `${env.BACKEND_URL}/watched/${animeId}`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             },
@@ -62,7 +62,7 @@ watchFunction.deleteWatched = async (animeId, setWatchIds, setWatched) => {
     try {
         const options = {
             method: 'DELETE',
-            url: `${process.env.BACKEND_URL}/watched/${animeId}`,
+            url: `${env.BACKEND_URL}/watched/${animeId}`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             }

@@ -29,10 +29,12 @@ function App() {
   setPageId(0)
 
   const fetchUser = async () => {
+    console.log(env)
+
     try {
       const userId = localStorage.getItem('userId')
       if (userId) {
-        const response = await axios.get(`${process.env.BACKEND_URL}/user/verify`, {
+        const response = await axios.get(`${env.BACKEND_URL}/user/verify`, {
           headers: {
             Authorization: userId
           }

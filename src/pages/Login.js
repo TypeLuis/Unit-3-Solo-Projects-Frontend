@@ -22,7 +22,7 @@ const Login = () => {
         try {
             e.preventDefault()
             // Pulls user from backend
-            const response = await axios.post(`${process.env.BACKEND_URL}/user/login`, { email, password })
+            const response = await axios.post(`${env.BACKEND_URL}/user/login`, { email, password })
 
             console.log(response)
 

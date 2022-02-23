@@ -1,3 +1,3 @@
 window.env = {
-  "BACKEND_URL": "http://localhost:3020"
+  "BACKEND_URL": "https://anime-database-backend.herokuapp.com"
 };

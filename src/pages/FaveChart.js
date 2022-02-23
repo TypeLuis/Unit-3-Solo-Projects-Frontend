@@ -8,6 +8,7 @@ import { UserContext } from "../context/UserContext"
 import { useState, useContext, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import env from 'react-dotenv'
 import './FaveChart.css'
 
 // ChartJS.register(ArcElement, Tooltip, Legend);
@@ -23,8 +24,7 @@ const FaveChart = () => {
     const [favoriteTotal, setFavoriteTotal] = useState(0);
 
     async function getFavorites() {
-        const response = await axios.get(`${process.env.BACKEND_URL}/fave/all`);
-        console.log(process.env.BACKEND_URL)
+        const response = await axios.get(`${env.BACKEND_URL}/fave/all`);
         console.log(response)
         setFavorites(response.data.Favorites);
     }

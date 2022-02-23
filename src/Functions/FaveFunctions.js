@@ -13,7 +13,7 @@ faveFunctions.fetchFaveAnime = async (setFaveIds, setFave) => {
     try {
         const options = {
             method: 'GET',
-            url: `${process.env.BACKEND_URL}/fave`,
+            url: `${env.BACKEND_URL}/fave`,
             headers: {
                 Authorization: localStorage.getItem('userId')
             }

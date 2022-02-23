@@ -7,7 +7,7 @@ const downloadFunctions = {}
 downloadFunctions.downloadImage = async (category) => {
     try {
 
-        const response = await axios.post(`${process.env.BACKEND_URL}/user/download`, { category: category }, {
+        const response = await axios.post(`${env.BACKEND_URL}/user/download`, { category: category }, {
             headers: {
                 Authorization: localStorage.getItem('userId')
             }
