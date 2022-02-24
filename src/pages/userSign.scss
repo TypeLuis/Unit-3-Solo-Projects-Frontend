@@ -48,15 +48,7 @@
 .textbox label {
   position: relative;
 }
-.username::before {
-  content: "";
-  position: absolute;
-  left: 5px;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  background: url(../logos/user.png) center / contain no-repeat;
-}
+.username
 .email::before {
   content: "";
   position: absolute;
