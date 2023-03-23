@@ -96,7 +96,7 @@
   position: relative;
   transition: 0.8s;
 
-  &::before,
+  &::before, 
   &::after {
     content: "";
     position: absolute;

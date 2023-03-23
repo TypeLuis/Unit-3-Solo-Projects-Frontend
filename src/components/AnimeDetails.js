@@ -31,12 +31,12 @@ const AnimeDetails = () => {
         switch (request) {
             case 'pictures':
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v4/anime/${id}/${request}`)
 
                 response = await fetchResponse.json()
 
                 // gets the data from the response
-                const pictures = response.pictures
+                const pictures = response.data
                 console.log('pictures', pictures)
 
                 // "[...new Set()]" allows makes a nested array of the data mapped
@@ -44,7 +44,7 @@ const AnimeDetails = () => {
 
                     // creates an array of the data we need to extract
                     // order of data is their index
-                    const allItems = [item.large]
+                    const allItems = [item.jpg.large_image_url]
 
                     // returns array to nested arrays
                     return allItems
@@ -60,18 +60,19 @@ const AnimeDetails = () => {
 
             case 'episodes':
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}/${page}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v4/anime/${id}/${request}?page=${page}`)
 
                 response = await fetchResponse.json()
+                console.log(response)
 
-                setPageLimit(response.episodes_last_page)
+                setPageLimit(response.pagination.last_visible_page)
                 // console.log(pageLimit)
 
-                const episodes = response.episodes
-                console.log('episodes', response.episodes)
+                const episodes = response.data
+                console.log('episodes', response.data)
 
                 const epi = [...new Set(episodes.map((item) => {
-                    const allItems = [item.title, item.video_url, item.episode_id, item.filler, item.recap]
+                    const allItems = [item.title, item.url, item.mal_id, item.filler, item.recap]
                     return allItems
                 }))]
 
@@ -83,15 +84,15 @@ const AnimeDetails = () => {
             case 'characters_staff':
 
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v4/anime/${id}/characters`)
 
                 response = await fetchResponse.json()
 
-                const characters = response.characters
-                console.log('Characters', response.characters)
+                const characters = response.data
+                console.log('Characters', response.data)
 
                 const allCharacters = [...new Set(characters.map((item) => {
-                    const allItems = [item.name, item.image_url, item.role]
+                    const allItems = [item.character.name, item.character.images.jpg.image_url, item.role]
                     return allItems
                 }))]
 
@@ -102,15 +103,15 @@ const AnimeDetails = () => {
 
             case 'videos':
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v4/anime/${id}/${request}`)
 
                 response = await fetchResponse.json()
 
-                const promos = response.promo
-                console.log('promo', response.promo)
+                const promos = response.data.promo
+                console.log('promo', response.data)
 
                 const videoPromotions = [...new Set(promos.map((item) => {
-                    const allItems = [item.title, item.video_url]
+                    const allItems = [item.title, item.trailer.embed_url]
 
                     return allItems
                 }))]
@@ -122,15 +123,15 @@ const AnimeDetails = () => {
 
             case 'recommendations':
 
-                fetchResponse = await fetch(`https://api.jikan.moe/v3/anime/${id}/${request}`)
+                fetchResponse = await fetch(`https://api.jikan.moe/v4/anime/${id}/${request}`)
 
                 response = await fetchResponse.json()
 
-                const recommends = response.recommendations
-                console.log('recommendations', response.recommendations)
+                const recommends = response.data
+                console.log('recommendations', response.data)
 
                 const recommendations = [...new Set(recommends.map((item) => {
-                    const allItems = [item.image_url, item.title, item.mal_id]
+                    const allItems = [item.entry.images.jpg.image_url, item.entry.title, item.entry.mal_id]
                     return allItems
                 }))]
 
@@ -182,7 +183,7 @@ const AnimeDetails = () => {
                                     const episodeFiller = item[3]
                                     const episodeRecap = item[4]
                                     return (
-                                        <div className='card'>
+                                        <div key={i} className='card'>
                                             <a href={episodeVideo}><h1>{episodeTitle}</h1></a>
                                             <h2>episode {episodeId}</h2>
 

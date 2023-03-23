@@ -49,13 +49,13 @@ const TopAnime = () => {
 
     const loadResponse = async () => {
         setResponse([])
-        const fetchResponse = await fetch(`https://api.jikan.moe/v3/top/anime/${page}/${subtype}`)
+        const fetchResponse = await fetch(`https://api.jikan.moe/v4/top/anime?page=${page}&type=${subtype}`)
 
         const response = await fetchResponse.json()
 
         console.log(response)
 
-        setResponse(response.top)
+        setResponse(response.data)
         console.log(pageLimit)
     }
 
@@ -95,7 +95,7 @@ const TopAnime = () => {
                             <div className='top-anime-details'>
 
 
-                                <img src={item.image_url} />
+                                <img src={item.images.jpg.image_url} />
 
                                 <div className='top-anime-span'>
 

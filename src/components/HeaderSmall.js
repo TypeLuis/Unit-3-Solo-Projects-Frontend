@@ -56,7 +56,7 @@ function NavItem(props) {
 
 
     // determines if dropdown is open or closed
-    const handleOpenClick = (e) => {
+    const handleOpenClick = (e) => { 
         e.preventDefault()
         // this setTimeout needs to be run before the setTimeout where we set states to True
 

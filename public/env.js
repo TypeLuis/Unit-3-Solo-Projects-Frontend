@@ -1,1 +1,3 @@
-window.env = {};
+window.env = {
+  "BACKEND_URL": "http://localhost:3020"
+};

@@ -29,15 +29,15 @@ const AnimePage = () => {
 
     const loadAnime = async () => {
         try {
-            setResponse({})
+            // setResponse({})
 
-            const request = await fetch(`https://api.jikan.moe/v3/anime/${id}`)
+            const request = await axios.get(`https://api.jikan.moe/v4/anime/${id}`)
 
-            const response = await request.json()
+            // const response = await request.json()
 
-            console.log(response)
+            console.log(request.data.data)
 
-            setResponse(response)
+            setResponse(request.data.data)
 
         }
         catch (error) {
@@ -48,7 +48,9 @@ const AnimePage = () => {
     }
 
 
-    useEffect(() => { loadAnime() }, [id])
+    useEffect(() => {
+        loadAnime()
+    }, [id])
 
 
     useEffect(() => {
@@ -65,8 +67,6 @@ const AnimePage = () => {
 
     return (
         <div>
-
-
 
             {user.id &&
                 <div className='toggle-div'>
@@ -95,90 +95,64 @@ const AnimePage = () => {
                 </div>
             }
 
-            <div className='anime-page'>
-
-                <div className='page-image-title'>
-
-                    <a href={response.url}> <h1 className='page-title'>{response.title}</h1> </a>
+            {response &&
 
 
-                    <div className='page-image'>
-                        <a href={`${response.image_url}`}> <img src={response.image_url} /> </a>
+                <div className='anime-page'>
+
+                    <div className='page-image-title'>
+
+                        <a href={response.url}> <h1 className='page-title'>{response.title}</h1> </a>
+
+
+                        <div className='page-image'>
+                            <a href={`${response?.images?.jpg?.image_url}`}> <img src={response?.images?.jpg?.image_url} /> </a>
+                        </div>
+
+                    </div>
+
+
+                    <Carousel>
+                        <Carousel.Item>
+                            <div className='page-synopsis'>
+                                <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
+                            </div>
+
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className='page-details'>
+                                <div>
+
+                                    <h1>Details</h1>
+                                    <span className='page-score detail-name'> Score: <span className='detail-response'> {response.score}</span> <br /></span>
+
+                                    <span className='detail-name'> premiered: <span className='detail-response'>  {response?.aired?.string}</span> <br /> </span>
+
+                                    <span className='detail-name'>status: <span className='detail-response'>  {response.status}</span>  <br /> </span>
+
+                                    <span className='detail-name'>rating: <span className='detail-response'>  {response.rating}</span> <br /> </span>
+
+                                    <span className='detail-name'>broadcast: <span className='detail-response'> {response?.broadcast?.string}</span> <br /> </span>
+
+                                    <span className='detail-name'>type: <span className='detail-response'>  {response.type}</span> <br /> </span>
+
+                                </div>
+                            </div>
+
+                        </Carousel.Item>
+                    </Carousel>
+
+
+
+
+
+                    <div className='page-trailer'>
+                        <h1>{response.title} Trailer:</h1>
+                        <iframe src={response?.trailer?.embed_url}></iframe>
                     </div>
 
                 </div>
-
-
-                <Carousel>
-  {/* <Carousel.Item style={{background: `url(${response.image_url})`}}>
-    <img
-      className=""
-      src="https://cdn.myanimelist.net/images/anime/12/28553.jpg"
-      alt="First slide"
-    />
-    <h1>KLK MANI</h1>
-    <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item> */}
-  <Carousel.Item>
-    <div className='page-synopsis'>
-      <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
-    </div>
-
-  </Carousel.Item>
-  <Carousel.Item>
-  <div className='page-details'>
-    <div>
-
-      <h1>Details</h1>
-      <span className='page-score detail-name'> Score: <span className='detail-response'> {response.score}</span> <br /></span>
-      
-      <span className='detail-name'> premiered: <span className='detail-response'>  {response.premiered}</span> <br /> </span>
-
-      <span className='detail-name'>status: <span className='detail-response'>  {response.status}</span>  <br /> </span>
-
-      <span className='detail-name'>rating: <span className='detail-response'>  {response.rating}</span> <br /> </span>
-
-      <span className='detail-name'>broadcast: <span className='detail-response'> {response.broadcast}</span> <br /> </span>
-
-      <span className='detail-name'>type: <span className='detail-response'>  {response.type}</span> <br /> </span>
-
-    </div>
-  </div>
-
-  </Carousel.Item>
-</Carousel>
-
-
-                {/* <div className='page-content'>
-
-                    <div className='page-synopsis'>
-                        <p > <span>Synopsis: <br /></span> {response.synopsis}</p>
-
-                    </div>
-
-                    <div className='page-details'>
-                        <span className='page-score'> Score: {response.score}</span>
-                        <span>premiered: {response.premiered} <br /> </span>
-                        <span>status: {response.status} <br /> </span>
-                        <span>rating: {response.rating} <br /> </span>
-                        <span>broadcast: {response.broadcast} <br /> </span>
-                    </div>
-
-                </div> */}
-
-
-
-
-
-                <div className='page-trailer'>
-                    <h1>{response.title} Trailer:</h1>
-                    <iframe src={response.trailer_url}></iframe>
-                </div>
-
-            </div>
+            }
 
 
         </div>

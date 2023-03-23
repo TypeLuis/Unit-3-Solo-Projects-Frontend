@@ -26,7 +26,7 @@ const SearchAnime = () => {
 
             const options = {
                 method: 'GET',
-                url: 'https://jikan1.p.rapidapi.com/search/anime',
+                url: 'https://api.jikan.moe/v4/anime',
                 params: { q: anime },
                 headers: {
                     'x-rapidapi-host': 'jikan1.p.rapidapi.com',
@@ -34,13 +34,13 @@ const SearchAnime = () => {
                 }
             };
 
-            const response = await axios.request(options)
+            const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${anime}`)
 
             console.log(response)
 
-            await setAnimeList(response.data.results)
+            setAnimeList(response.data.data)
 
-            await setToggle(true)
+            setToggle(true)
 
 
 
@@ -68,7 +68,7 @@ const SearchAnime = () => {
                                     <Link to={`/anime/${item.mal_id}`}> <h1>{item.title}</h1> </Link>
 
                                     <div>
-                                        <img src={item.image_url} alt={item.title} />
+                                        <img src={item.images.jpg.image_url} alt={item.title} />
                                         <p>{item.synopsis}</p>
                                     </div>
 
